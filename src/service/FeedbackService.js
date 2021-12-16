@@ -16,5 +16,9 @@ const deleteFeedbackService = (deleteFeedback) => {
     return axios.delete(`/deletefeedbackbyid/${deleteFeedback}`);
 }
 
+const addFeedbackService = (add) => {
+    console.log('addFeedbackService');
+    return axios.post(`/feedback`,add);
+}
 
-export { getFeedbackByIdService,getAllFeedbackService,deleteFeedbackService};
+export { getFeedbackByIdService,getAllFeedbackService,deleteFeedbackService,addFeedbackService};

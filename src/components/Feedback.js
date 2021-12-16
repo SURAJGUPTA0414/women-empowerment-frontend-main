@@ -1,41 +1,60 @@
-import { getAllFeedback, getFeedBackById ,deleteFeedbackByID } from "../redux/FeedbackSlice";
+import { getAllFeedback, getFeedBackById ,deleteFeedbackByID,addFeedback } from "../redux/FeedbackSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getFeedbackByIdService,getAllFeedbackService ,deleteFeedbackService} from "../service/FeedbackService";
-
+import { getFeedbackByIdService,getAllFeedbackService ,deleteFeedbackService,addFeedbackService} from "../service/FeedbackService";
+import FeedbackModel from "../model/FeedbackModel";
 
 const Feedback = () => {
 
     const [fid, setFid] = useState('');
     const [deleteFeedback, setDeleteFeedback] = useState('');
 
+    const [feedbackData, setFeedbackData] = useState(new FeedbackModel());
+
+
     const dispatch = useDispatch();
 
     const feedbackDataFromStore = useSelector((state) => state.feedback.feedbackState);
     const feedbackList = useSelector((state) => state.feedback.feedbackList);
     const feedbackDelete = useSelector((state) => state.feedback.feedbackDelete);
+    const feedbackAdd = useSelector((state) => state.feedback.feedbackAdd);
 
-    const handleFeedback = (e) => {
-        console.log('handleFeedback');
-        setFid(e.target.value);
+    const handleFeedbackData = (e) => {
+        console.log(e);
+        setFeedbackData({
+            ...feedbackData,
+            [e.target.name]: e.target.value
+        });
     }
 
-    const handleDeleteFeedback = (e) => {
-        console.log('handleDeleteFeedback');
-        setDeleteFeedback(e.target.value);
-    }
+    // const handleFeedback = (e) => {
+    //     console.log('handleFeedback');
+    //     setFid(e.target.value);
+    // }
+
+    // const handleDeleteFeedback = (e) => {
+    //     console.log('handleDeleteFeedback');
+    //     setDeleteFeedback(e.target.value);
+    // }
+
+    // const handleAddbank = (e) => {
+    //     console.log(e.target.value);
+    //     setNewBankObj({
+    //         ...newBankObj,
+    //         [e.target.name]: e.target.value
+    //     }
 
 
     const submitGetFeedbackById = (evt) => {
         evt.preventDefault();
         console.log('submitGetFeedbackById');
-        getFeedbackByIdService(fid)
+        getFeedbackByIdService(feedbackData.feedBackId)
             .then((response) => {
                 dispatch(getFeedBackById(response.data));             // Sending data to redux store
 
             })
             .catch(() => {
-                alert(`Feedback with ${fid} not found.`);
+                alert(`Feedback with ${feedbackData.feedBackId} not found.`);
             });
 
         setFid('');
@@ -56,17 +75,33 @@ const Feedback = () => {
     const submitDeleteFeedback = (evt) => {
         evt.preventDefault();
         console.log('submitDeleteFeedback');
-        deleteFeedbackService(deleteFeedback)
+        deleteFeedbackService(feedbackData.feedBackId)
             .then((response) => {
                 alert(`Feedback deleted successfully.`)
                 dispatch(deleteFeedbackByID(response.data));             // Sending data to redux store
 
             })
             .catch(() => {
-                alert(`Feedback with Id ${deleteFeedback} not found.`);
+                alert(`Feedback with Id ${feedbackData.feedBackId} not found.`);
             });
 
     }
+
+    const submitAddFeedback = (evt) => {
+        evt.preventDefault();
+        console.log('submitAddFeedback');
+        addFeedbackService(feedbackData)
+            .then((response) => {
+                alert(`feedback Added successfully.`)
+                dispatch(addFeedback(response.data));             // Sending data to redux store
+
+            })
+            .catch(() => {
+                alert(`Feedback with Id ${feedbackData.feedBackId} already present.`);
+            });
+
+    }
+
 
 
 
@@ -77,7 +112,7 @@ const Feedback = () => {
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Find feedback by id</h3>
                 <form className="form form-group form-primary" onSubmit={submitGetFeedbackById}>
-                    <input className="form-control mt-3" type="number" id="fid" name="fid" value={fid} onChange={handleFeedback} placeholder="Enter Feedback Id" autoFocus required />
+                    <input className="form-control mt-3" type="number" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={handleFeedbackData} placeholder="Enter Feedback Id" autoFocus required />
                     <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Feedback" />
                 </form>
 
@@ -152,8 +187,8 @@ const Feedback = () => {
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Delete feedback by Id</h3>
                 <form className="form form-group form-primary" onSubmit={submitDeleteFeedback}>
-                    <input className="form-control mt-3" type="number" id="deleteFeedback" name="deleteFeedback" value={deleteFeedback} onChange={ handleDeleteFeedback} placeholder="Enter Feedback Id" autoFocus required />
-                    <input className="form-control mt-3 btn btn-primary" type="submit" value="Delete Feedback" />
+                    <input className="form-control mt-3" type="number" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={ handleFeedbackData} placeholder="Enter Feedback Id" autoFocus required />
+                    <input className="form-control mt-3 btn btn-danger" type="submit" value="Delete Feedback" />
                 </form>
 
                 <table className="table table-light table-striped ">
@@ -184,7 +219,68 @@ const Feedback = () => {
 
             <hr />
             {/* ---------------------------------------------------------------------------------- */}
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Add Feedback</h3>
 
+                <form className="form form-group form-primary" onSubmit={submitAddFeedback}>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Feedback Id</label>
+                        <div class="col-sm-10">
+                        <input type="number" class="form-control" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={ handleFeedbackData} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">comments</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="comments" name="comments" value={feedbackData.comments} onChange={handleFeedbackData} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">feedbackdate</label>
+                        <div class="col-sm-10">
+                        <input type="date" class="form-control" id="feedbackdate" name="feedbackdate" value={feedbackData.feedbackdate} onChange={handleFeedbackData} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">overallRating</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="overallRating" name="overallRating" value={feedbackData.overallRating} onChange={handleFeedbackData} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">schemeRating</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="schemeRating" name="schemeRating" value={feedbackData.schemeRating} onChange={handleFeedbackData} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">schemeTrainingRating</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="schemeTrainingRating" name="schemeTrainingRating" value={feedbackData.schemeTrainingRating} onChange={handleFeedbackData} />
+                        </div>
+                    </div>
+
+                    {/* <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Course Id</label>
+                        <div class="col-sm-10">
+                        <input type="number" class="form-control" id="schemeType" name="schemeType" value={schemeData.} onChange={handleSchemeData} />
+                        </div>
+                    </div> */}
+
+                    
+
+                    <input className="form-control mt-3 btn btn-success" type="submit" value="Add Feedback" />
+                </form>
+
+            </div>
+            
+{/* ---------------------------------------------------------------------------------- */}
         </div>
     );
 }
