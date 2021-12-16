@@ -1,7 +1,7 @@
-import { getAllFeedback, getFeedBackById ,deleteFeedbackByID,addFeedback } from "../redux/FeedbackSlice";
+import { getAllFeedback, getFeedBackById ,deleteFeedbackByID,addFeedback,updateFeedback } from "../redux/FeedbackSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getFeedbackByIdService,getAllFeedbackService ,deleteFeedbackService,addFeedbackService} from "../service/FeedbackService";
+import { getFeedbackByIdService,getAllFeedbackService ,deleteFeedbackService,addFeedbackService,updateFeedbackService} from "../service/FeedbackService";
 import FeedbackModel from "../model/FeedbackModel";
 
 const Feedback = () => {
@@ -102,12 +102,26 @@ const Feedback = () => {
 
     }
 
+    const submitUpdateFeedback=(evt)=>{
+        evt.preventDefault();
+        console.log("submitUpdateFeedback");
+        updateFeedbackService(feedbackData.feedBackId)
+        .then((response)=>{
+            dispatch(updateFeedback(response.data));
+            alert(`feedback updated sucesfully`);
+        })
+        .catch(()=>{
+            alert(`feedback is not found`);
+        });
+        
+    }
+
 
 
 
     return (
         <div className="container">
-            <h1 className="display-4 text-primary mt-3 mb-3" >FeedBack Component</h1>
+            <h1 className="display-4 text-primary mt-3 mb-3" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FeedBack Component</h1>
 
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Find feedback by id</h3>
@@ -281,6 +295,21 @@ const Feedback = () => {
             </div>
             
 {/* ---------------------------------------------------------------------------------- */}
+
+<div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Update Feedback</h3>
+                <form className="form form-group form-primary" onSubmit={submitUpdateFeedback}>
+                <input className="form-control mt-3" type="text" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={handleFeedbackData} placeholder="Enter Feedback id to update" autoFocus required />
+                <input className="form-control mt-3" type="text" id="comments" name="comments" value={feedbackData.comments} onChange={handleFeedbackData} placeholder="Enter Comments" autoFocus required />
+                <input className="form-control mt-3" type="date" id="feedbackdate" name="feedbackdate" value={feedbackData.feedbackdate} onChange={handleFeedbackData} placeholder="Enter Feedbackdate" autoFocus required />
+                <input className="form-control mt-3" type="text" id="overallRating" name="overallRating" value={feedbackData.overallRating} onChange={handleFeedbackData} placeholder="Enter OverallRating" autoFocus required />
+                <input className="form-control mt-3" type="text" id="schemeRating" name="schemeRating" value={feedbackData.schemeRating} onChange={handleFeedbackData} placeholder="Enter course  schemeRating" autoFocus required />
+                <input className="form-control mt-3" type="text" id="schemeTrainingRating" name="schemeTrainingRating" value={feedbackData.schemeTrainingRating} onChange={handleFeedbackData} placeholder="schemeTrainingRating" autoFocus required />
+                 <input className="form-control mt-3 btn btn-primary" type="submit" value="update Feedback" />
+                </form>
+            </div>
+
+ {/* ---------------------------------------------------------------------------------- */}
         </div>
     );
 }

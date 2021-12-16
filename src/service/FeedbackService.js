@@ -21,4 +21,9 @@ const addFeedbackService = (add) => {
     return axios.post(`/feedback`,add);
 }
 
-export { getFeedbackByIdService,getAllFeedbackService,deleteFeedbackService,addFeedbackService};
+const updateFeedbackService=(add)=>{
+    console.log("updateFeedbackService");
+    return axios.put(`/updatefeedback`,add);
+}
+
+export { getFeedbackByIdService,getAllFeedbackService,deleteFeedbackService,addFeedbackService,updateFeedbackService};

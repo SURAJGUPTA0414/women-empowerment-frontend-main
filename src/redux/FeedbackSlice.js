@@ -10,6 +10,7 @@ const FeedbackSlice = createSlice({
         feedbackList:[],
         feedbackDelete : new FeedbackModel(),
         feedbackAdd : new FeedbackModel()
+       
     },
 
     reducers: {
@@ -28,12 +29,18 @@ const FeedbackSlice = createSlice({
         addFeedback : (state, action) => {
             console.log("FeedbackSlice reducers addFeedback");
             state.feedbackAdd = action.payload;
+        },
+
+        updateFeedback:(state,action)=>{
+            console.log("FeedbackSlice reducers updateFeedback");
+            state.trainingcourseState=action.payload;
         }
+        
         
     }
 }
 
 );
 
-export const {getFeedBackById,getAllFeedback,deleteFeedbackByID, addFeedback} = FeedbackSlice.actions;
+export const {getFeedBackById,getAllFeedback,deleteFeedbackByID, addFeedback,updateFeedback} = FeedbackSlice.actions;
 export default FeedbackSlice.reducer;
