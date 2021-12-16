@@ -10,6 +10,7 @@ const Feedback = () => {
     const [deleteFeedback, setDeleteFeedback] = useState('');
 
     const [feedbackData, setFeedbackData] = useState(new FeedbackModel());
+    const [feedback,setFeedback]=useState(new FeedbackModel());
 
 
     const dispatch = useDispatch();
@@ -25,6 +26,16 @@ const Feedback = () => {
             ...feedbackData,
             [e.target.name]: e.target.value
         });
+    }
+
+    const handleUpdate=(e)=>{
+        console.log("update feedback");
+
+        setFeedback({
+            ...feedback,
+            [e.target.name]:e.target.value
+        });
+       // console.log(e.target.value);
     }
 
     // const handleFeedback = (e) => {
@@ -105,7 +116,7 @@ const Feedback = () => {
     const submitUpdateFeedback=(evt)=>{
         evt.preventDefault();
         console.log("submitUpdateFeedback");
-        updateFeedbackService(feedbackData.feedBackId)
+        updateFeedbackService(feedback)
         .then((response)=>{
             dispatch(updateFeedback(response.data));
             alert(`feedback updated sucesfully`);
@@ -299,12 +310,12 @@ const Feedback = () => {
 <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Update Feedback</h3>
                 <form className="form form-group form-primary" onSubmit={submitUpdateFeedback}>
-                <input className="form-control mt-3" type="text" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={handleFeedbackData} placeholder="Enter Feedback id to update" autoFocus required />
-                <input className="form-control mt-3" type="text" id="comments" name="comments" value={feedbackData.comments} onChange={handleFeedbackData} placeholder="Enter Comments" autoFocus required />
-                <input className="form-control mt-3" type="date" id="feedbackdate" name="feedbackdate" value={feedbackData.feedbackdate} onChange={handleFeedbackData} placeholder="Enter Feedbackdate" autoFocus required />
-                <input className="form-control mt-3" type="text" id="overallRating" name="overallRating" value={feedbackData.overallRating} onChange={handleFeedbackData} placeholder="Enter OverallRating" autoFocus required />
-                <input className="form-control mt-3" type="text" id="schemeRating" name="schemeRating" value={feedbackData.schemeRating} onChange={handleFeedbackData} placeholder="Enter course  schemeRating" autoFocus required />
-                <input className="form-control mt-3" type="text" id="schemeTrainingRating" name="schemeTrainingRating" value={feedbackData.schemeTrainingRating} onChange={handleFeedbackData} placeholder="schemeTrainingRating" autoFocus required />
+                <input className="form-control mt-3" type="text" id="feedBackId" name="feedBackId" value={feedback.feedBackId} onChange={handleUpdate} placeholder="Enter Feedback id to update" autoFocus required />
+                <input className="form-control mt-3" type="text" id="comments" name="comments" value={feedback.comments} onChange={handleUpdate} placeholder="Enter Comments" autoFocus required />
+                <input className="form-control mt-3" type="date" id="feedbackdate" name="feedbackdate" value={feedback.feedbackdate} onChange={handleUpdate} placeholder="Enter Feedbackdate" autoFocus required />
+                <input className="form-control mt-3" type="text" id="overallRating" name="overallRating" value={feedback.overallRating} onChange={handleUpdate} placeholder="Enter OverallRating" autoFocus required />
+                <input className="form-control mt-3" type="text" id="schemeRating" name="schemeRating" value={feedback.schemeRating} onChange={handleUpdate} placeholder="Enter course  schemeRating" autoFocus required />
+                <input className="form-control mt-3" type="text" id="schemeTrainingRating" name="schemeTrainingRating" value={feedback.schemeTrainingRating} onChange={handleUpdate} placeholder="schemeTrainingRating" autoFocus required />
                  <input className="form-control mt-3 btn btn-primary" type="submit" value="update Feedback" />
                 </form>
             </div>
