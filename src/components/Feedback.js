@@ -144,7 +144,7 @@ const Feedback = () => {
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        <h3>Find feedback by id</h3>
+        <h4>Find feedback by id</h4>
         </button>
       </h2>
     </div>
@@ -160,7 +160,7 @@ const Feedback = () => {
                 </form>
 
                 <table className="table table-light table-striped ">
-                        <thead>
+                        <thead class="table-warning">
                             <tr>
                                 <th>FeedBack Id</th>
                                 <th>Comments</th>
@@ -196,7 +196,7 @@ const Feedback = () => {
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <h3>Find all Feedback</h3>
+        <h4>Find all Feedback</h4>
         </button>
       </h2>
     </div>
@@ -212,7 +212,7 @@ const Feedback = () => {
                         </form>
                     </div>
                     <table className="table table-light table-striped ">
-                        <thead>
+                        <thead class="table-warning">
                             <tr>
                                 <th>FeedBack Id</th>
                                 <th>Comments</th>
@@ -251,7 +251,7 @@ const Feedback = () => {
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        <h3>Delete feedback by Id</h3>
+        <h4>Delete feedback by Id</h4>
         </button>
       </h2>
     </div>
@@ -267,7 +267,7 @@ const Feedback = () => {
                 </form>
 
                 <table className="table table-light table-striped ">
-                    <thead>
+                    <thead class="table-warning">
                         <tr>
                                 <th>FeedBack Id</th>
                                 <th>Comments</th>
@@ -303,7 +303,7 @@ const Feedback = () => {
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
-        <h3>Add Feedback</h3>
+        <h4>Add Feedback</h4>
         </button>
       </h2>
     </div>
@@ -382,7 +382,7 @@ const Feedback = () => {
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapselast" aria-expanded="false" aria-controls="collapselast">
-        <h3>Update Feedback</h3>
+        <h4>Update Feedback</h4>
         </button>
       </h2>
     </div>
@@ -390,8 +390,9 @@ const Feedback = () => {
       <div class="card-body">
         
 
-      <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+      <div className="col-12 border border-light shadow p-3 mb-5 bg-white ">
                 {/* <h3>Update Feedback</h3> */}
+                
                 <form className="form form-group form-primary" onSubmit={submitUpdateFeedback}>
                 <input className="form-control mt-3" type="text" id="feedBackId" name="feedBackId" value={feedback.feedBackId} onChange={handleUpdate} placeholder="Enter Feedback id to update" autoFocus required />
                 <input className="form-control mt-3" type="text" id="comments" name="comments" value={feedback.comments} onChange={handleUpdate} placeholder="Enter Comments" autoFocus required />
