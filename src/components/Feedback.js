@@ -138,7 +138,7 @@ const Feedback = () => {
           
           <div class="accordion" id="accordionExample">
 
-           
+  {/* ----------------------------------------Find feedback by id------------------------------------------ */}         
 
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -190,7 +190,7 @@ const Feedback = () => {
       </div>
     </div>
   </div>
-   {/* ---------------------------------------------------------------------------------- */}
+   {/* ------------------------------------Find all Feedback---------------------------------------------- */}
 
    <div class="card">
     <div class="card-header" id="headingTwo">
@@ -245,7 +245,7 @@ const Feedback = () => {
       </div>
     </div>
   </div>
-  {/* ---------------------------------------------------------------------------------- */}
+  {/* ---------------------------------------Delete feedback by Id------------------------------------------- */}
 
   <div class="card">
     <div class="card-header" id="headingThree">
@@ -297,7 +297,7 @@ const Feedback = () => {
       </div>
     </div>
   </div>
-  {/* ---------------------------------------------------------------------------------- */}
+  {/* --------------------------------------Add Feedback-------------------------------------------- */}
 
   <div class="card">
     <div class="card-header" id="headingTwo">
@@ -325,7 +325,7 @@ const Feedback = () => {
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">comments</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="comments" name="comments" value={feedbackData.comments} onChange={handleFeedbackData} />
+                        <input  type="text"  class="form-control" id="comments" name="comments" value={feedbackData.comments} onChange={handleFeedbackData} />
                         </div>
                     </div>
 
@@ -377,7 +377,7 @@ const Feedback = () => {
 
     
   </div>
-{/* ---------------------------------------------------------------------------------- */}
+{/* --------------------------------------Update Feedback-------------------------------------------- */}
 
 <div class="card">
     <div class="card-header" id="headingTwo">
