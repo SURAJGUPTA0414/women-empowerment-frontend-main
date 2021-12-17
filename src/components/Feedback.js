@@ -155,7 +155,7 @@ const Feedback = () => {
       <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 {/* <h3>Find feedback by id</h3> */}
                 <form className="form form-group form-primary" onSubmit={submitGetFeedbackById}>
-                    <input className="form-control mt-3" type="number" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={handleFeedbackData} placeholder="Enter Feedback Id" autoFocus required />
+                    <input className="form-control mt-3" type="number" min="1" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={handleFeedbackData} placeholder="Enter Feedback Id" autoFocus required />
                     <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Feedback" />
                 </form>
 
@@ -202,7 +202,7 @@ const Feedback = () => {
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
-       
+       ''
       <div>
                 <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                     {/* <h3>Find all Feedback</h3> */}
@@ -262,7 +262,7 @@ const Feedback = () => {
       <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 {/* <h3>Delete feedback by Id</h3> */}
                 <form className="form form-group form-primary" onSubmit={submitDeleteFeedback}>
-                    <input className="form-control mt-3" type="number" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={ handleFeedbackData} placeholder="Enter Feedback Id" autoFocus required />
+                    <input className="form-control mt-3" type="number" min="1" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={ handleFeedbackData} placeholder="Enter Feedback Id" autoFocus required />
                     <input className="form-control mt-3 btn btn-danger" type="submit" value="Delete Feedback" />
                 </form>
 
@@ -318,7 +318,7 @@ const Feedback = () => {
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Feedback Id</label>
                         <div class="col-sm-10">
-                        <input type="number" class="form-control" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={ handleFeedbackData} />
+                        <input type="number" min="1" class="form-control" id="feedBackId" name="feedBackId" value={feedbackData.feedBackId} onChange={ handleFeedbackData} />
                         </div>
                     </div>
 
@@ -339,21 +339,21 @@ const Feedback = () => {
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">overallRating</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="overallRating" name="overallRating" value={feedbackData.overallRating} onChange={handleFeedbackData} />
+                        <input type="number" min="1" max="5" class="form-control" id="overallRating" name="overallRating" value={feedbackData.overallRating} onChange={handleFeedbackData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">schemeRating</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="schemeRating" name="schemeRating" value={feedbackData.schemeRating} onChange={handleFeedbackData} />
+                        <input type="number" min="1" max="5"class="form-control" id="schemeRating" name="schemeRating" value={feedbackData.schemeRating} onChange={handleFeedbackData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">schemeTrainingRating</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="schemeTrainingRating" name="schemeTrainingRating" value={feedbackData.schemeTrainingRating} onChange={handleFeedbackData} />
+                        <input type="number" min="1" max="5" class="form-control" id="schemeTrainingRating" name="schemeTrainingRating" value={feedbackData.schemeTrainingRating} onChange={handleFeedbackData} />
                         </div>
                     </div>
 
@@ -367,6 +367,7 @@ const Feedback = () => {
                     
 
                     <input className="form-control mt-3 btn btn-success" type="submit" value="Add Feedback" />
+                    {/* <input class="btn btn-primary" type="reset" value="Reset"></input> */}
                 </form>
 
             </div>
@@ -394,12 +395,12 @@ const Feedback = () => {
                 {/* <h3>Update Feedback</h3> */}
                 
                 <form className="form form-group form-primary" onSubmit={submitUpdateFeedback}>
-                <input className="form-control mt-3" type="text" id="feedBackId" name="feedBackId" value={feedback.feedBackId} onChange={handleUpdate} placeholder="Enter Feedback id to update" autoFocus required />
+                <input className="form-control mt-3" type="number" id="feedBackId" name="feedBackId" value={feedback.feedBackId} onChange={handleUpdate} placeholder="Enter Feedback id to update" autoFocus required />
                 <input className="form-control mt-3" type="text" id="comments" name="comments" value={feedback.comments} onChange={handleUpdate} placeholder="Enter Comments" autoFocus required />
                 <input className="form-control mt-3" type="date" id="feedbackdate" name="feedbackdate" value={feedback.feedbackdate} onChange={handleUpdate} placeholder="Enter Feedbackdate" autoFocus required />
-                <input className="form-control mt-3" type="text" id="overallRating" name="overallRating" value={feedback.overallRating} onChange={handleUpdate} placeholder="Enter OverallRating" autoFocus required />
-                <input className="form-control mt-3" type="text" id="schemeRating" name="schemeRating" value={feedback.schemeRating} onChange={handleUpdate} placeholder="Enter course  schemeRating" autoFocus required />
-                <input className="form-control mt-3" type="text" id="schemeTrainingRating" name="schemeTrainingRating" value={feedback.schemeTrainingRating} onChange={handleUpdate} placeholder="schemeTrainingRating" autoFocus required />
+                <input className="form-control mt-3" type="number"  min="1" max="5" id="overallRating" name="overallRating" value={feedback.overallRating} onChange={handleUpdate} placeholder="Enter OverallRating" autoFocus required />
+                <input className="form-control mt-3" type="number"  min="1" max="5" id="schemeRating" name="schemeRating" value={feedback.schemeRating} onChange={handleUpdate} placeholder="Enter course  schemeRating" autoFocus required />
+                <input className="form-control mt-3" type="number"  min="1" max="5" id="schemeTrainingRating" name="schemeTrainingRating" value={feedback.schemeTrainingRating} onChange={handleUpdate} placeholder="schemeTrainingRating" autoFocus required />
                  <input className="form-control mt-3 btn btn-primary" type="submit" value="update Feedback" />
                 </form>
             </div>
