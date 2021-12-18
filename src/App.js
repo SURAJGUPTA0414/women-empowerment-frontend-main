@@ -1,12 +1,13 @@
 import './App.css';
-import Feedback from './components/Feedback';
+import FeedbackComponent from './components/FeedbackComponent';
+import UserFeedbackComponent from './components/UserFeedbackComponent';
 
 
 const App = () => {
   return (
     <div className="bg-light">
-      
-      <Feedback />
+      {/* <UserFeedbackCoponent/> */}
+      <FeedbackComponent />
     </div>
   );
 }
