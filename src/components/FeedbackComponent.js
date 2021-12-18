@@ -124,10 +124,10 @@ const FeedbackComponent = () => {
 
 <h1 className="display-4 text-primary mt-3 mb-3" ><b>FeedBack Component</b></h1><br/>
 
-   <UserFeedbackCoponent/>
+  
           
           <div class="accordion" id="accordionExample">
-
+          <UserFeedbackCoponent/>
   
    
   {/* ---------------------------------------Delete feedback by Id------------------------------------------- */}
